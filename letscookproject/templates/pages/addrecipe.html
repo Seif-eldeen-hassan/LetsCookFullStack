@@ -1,0 +1,74 @@
+{% load static %}
+<link rel="stylesheet" href="{% static 'css/addrecipe.css' %}">
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Semi+Condensed:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Faustina:ital,wght@0,300..800;1,300..800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Semi+Condensed:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Faustina:ital,wght@0,300..800;1,300..800&family=Mulish:ital,wght@0,200..1000;1,200..1000&family=Oswald:wght@200..700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Semi+Condensed:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Faustina:ital,wght@0,300..800;1,300..800&family=Mulish:ital,wght@0,200..1000;1,200..1000&display=swap" rel="stylesheet">
+{% include 'shared/header.html' %}
+
+<main>
+    {% block content %}
+    <h1 class="add_title"> ADD RECIPE</h1>
+    <form class="add_product" method="POST" enctype="multipart/form-data" action="{% url 'addrecipe' %}">
+        {% csrf_token %}   
+        <div class="first_section">
+            <input type="hidden" id="recipe_id" name="recipe_id" value="{{ recipe.id }}">
+            <input type="hidden" id="csrf_token" value="{{ csrf_token }}">
+            <input type="hidden" id="remove_icon_url" value="{% static 'images/remove.svg' %}">
+            <div class="name_course_section">
+                <div class="input">
+                    <h3 class="input_title">Recipe Name </h3>
+                    <input type="text" class="take_input" name="recipe_name" placeholder="Enter recipe name..." value={{recipe.RecipeName}}>
+                </div>
+                <div class="Course">
+                    <h3 class="input_title">Select Course </h3>
+                    <select class="select_course" name="course">
+                        <option value="" disabled {% if not recipe.Course %}selected{% endif %}>Choose a course...</option>
+                        <option value="Appetizers" {% if recipe.Course == 'Appetizers' %}selected{% endif %}>Appetizers</option>
+                        <option value="Main Course" {% if recipe.Course == 'Main Course' %}selected{% endif %}>Main Course</option>
+                        <option value="Dessert" {% if recipe.Course == 'Dessert' %}selected{% endif %}>Dessert</option>
+                    </select>
+                </div>
+            </div>
+            <div class="take_recipe_image">
+                <h3 class="input_title">Recipe Image </h3>
+                <div class="recipe_image"style="{% if recipe.RecipeImage %}background-image: url('{{ recipe.RecipeImage.url }}');{% endif %}">
+                    <input class="input_img" type="file" accept="image/png, image/jpeg , image/webp" name="image">
+                 <img src="{% static 'images/output-onlinepngtools(2).png' %}" class="upload_icon {% if recipe.RecipeImage.url != '/media/recipe_images/b170870007dfa419295d949814474ab2_t.jpg' %}none{% endif %}">
+                </div>
+            </div>
+        </div>
+        <div class="description">
+            <h3 class="input_title">Description</h3>
+            <textarea id="desc_input" class="take_input" placeholder="Enter recipe description..." name="description" required>{{recipe.description}}</textarea>
+        </div>
+        <h3 class="input_title">Ingredients</h3>
+        <div class="ingredients">
+            <div class="inputs">
+                <div class="ing_name">
+                    <h3 class="input_title"> Ingredient Name</h3>
+                    <input type="text" class="take_input" id="ingredient_name_input" placeholder="Enter ingredient name...">
+                </div>
+                <div class="ing_name">
+                    <h3 class="input_title"> Ingredient Quantity</h3>
+                    <input type="number" class="take_input" id="ingredient_quan_input" placeholder="Enter ingredient quantity..." min="1">
+                </div>
+            </div>
+            <button class="add_ingredient"> Add ingredient </button>
+            <div class="ingredients_data">
+                {% for ing in ingredients %}
+                    <div class="ingredient" data-id="{{ ing.id }}">
+                        <h1 class="ingredient_quan">x{{ ing.amount }}</h1>
+                        <h1 class="ingredient_name">{{ ing.name }}</h1>
+                        <img src="{% static 'images/remove.svg' %}" class="remove">
+                    </div>
+                    <hr class="line">
+                {% endfor %}
+            </div>
+        </div>
+        <button class="button" id="add_recipe_bt" type="submit" > Add Recipe </button>
+    </form>
+    {% endblock %}
+</main>
+
+{% include 'shared/footer.html' %}
+<script src="{% static 'js/addrecipe.js' %}"></script>

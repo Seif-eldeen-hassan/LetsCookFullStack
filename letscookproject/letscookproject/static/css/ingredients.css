@@ -1,0 +1,45 @@
+.ingredients_data{
+    width: 900px;
+    height: auto;
+    border: 2px solid #165F35;
+    padding: 50px;
+    margin-top: 30px;
+}
+
+#recipe_name_int{
+    text-align: center;
+    margin-top: 0px;
+}
+
+#recipe_course_int{
+    text-align: center;
+    margin-top: 15px;
+}
+
+.ingredients_box{
+    width: 100%;
+}
+
+.ingredient{
+    display: flex;
+    gap: 40px;
+    margin-left: 10px;
+    position: relative;
+    
+}
+
+.ingredient_quan{
+    color: #165F35;
+    font-family: "Mulish";
+    font-weight: 600;
+    font-style: normal;
+}
+
+.ingredient_name{
+    font-family: "Mulish";
+    font-weight: 300;
+    font-style: normal;
+    font-size: 22px;
+    margin-top: 30px;
+
+}

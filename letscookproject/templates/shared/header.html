@@ -1,0 +1,35 @@
+{% load static %}
+<link rel="stylesheet" href="{% static 'css/header.css' %}">
+<nav class="nav">
+        <div class="logo">
+            <h1 class="lets"> LET’S </h1>
+            <h1 class="cook"> COOK </h1>
+        </div>
+        {% if user %}
+        <div class="tabs">
+            <a class="tab {% if request.path|slice:5 == '/home'  %}choosed_tab{% endif %}" id="home" href="{% url 'home' %}">Home</a>
+            <a class="tab {% if request.path|slice:8 == '/recipes'  %}choosed_tab{% endif %}" id="recipes" href="{% url 'recipes' %}">Recipes</a>
+            {% if is_admin %}
+            <a class="tab {% if request.path|slice:10 == '/myrecipes'  %}choosed_tab{% endif %}" id="my_recipes" href="{% url 'myrecipes' %}">MyRecipes</a>
+            <a class="tab {% if request.path|slice:10 == '/addrecipe'  %}choosed_tab{% endif %}" id="add_recipes" href="{% url 'addrecipe' %}">Add Recipe</a>
+            {% endif %}
+            <a class="tab {% if request.path|slice:11 == '/favourites'  %}choosed_tab{% endif %}" id="acc" href="{% url 'favourites' %}">Favourites</a>
+            <a class="tab {% if request.path|slice:8 == '/account'  %}choosed_tab{% endif %}" id="acc" href="{% url 'account' %}">Account</a>
+            <div class="search_box">
+                <img src="{% static 'images/search.png' %}"  class="search_icon">
+                <div class="search_tab" id= "admin_search_tab">
+                    <input type="text" class="search" placeholder="Search">
+                    <div class="search_result_tab">
+            
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="profile_image"> </div>
+        {% else %}
+         <div class="buttons">
+            <a href="{% url 'signup' %}"> <button class="button" id="signup">Sign up</button> </a>
+            <a href="{% url 'signin' %}" class="login" > Log in </a>
+        </div> 
+        {% endif %}
+</nav>

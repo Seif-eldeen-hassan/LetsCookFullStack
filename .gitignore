@@ -1,0 +1,31 @@
+# Ignore Python cache
+__pycache__/
+*.py[cod]
+*.sqlite3
+
+# Ignore environment
+venv/
+env/
+ENV/
+.venv/
+Lib/
+Scripts/
+pyvenv.cfg
+
+# Ignore editor/IDE configs
+*.swp
+*.swo
+*.log
+.vscode/
+.idea/
+
+# Ignore static/media runtime files (optional)
+staticfiles/
+media/
+
+# Ignore Django secret settings (optional)
+.env
+*.env
+
+# Allow everything else
+!.gitignore

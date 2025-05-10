@@ -1,0 +1,37 @@
+{% load static %}
+<link rel="stylesheet" href="{% static 'css/recipes.css' %}">
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Semi+Condensed:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Faustina:ital,wght@0,300..800;1,300..800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Semi+Condensed:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Faustina:ital,wght@0,300..800;1,300..800&family=Mulish:ital,wght@0,200..1000;1,200..1000&family=Oswald:wght@200..700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Semi+Condensed:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Faustina:ital,wght@0,300..800;1,300..800&family=Mulish:ital,wght@0,200..1000;1,200..1000&display=swap" rel="stylesheet">
+{% include 'shared/header.html' %}
+
+<main>
+    {% block content %}
+        <div class="main_page">
+            {% for recipe in recipes %}
+              <div class="recipe_card" data-recipe-id="{{recipe.id}}">
+                    <div class="Recipe">
+                        <div class="text_details">
+                            <h1 class="recipe_name"> {{recipe.RecipeName}} </h1>
+                             <div class="edit">
+                                <h2 class="course"> {{recipe.Course}} </h2>
+                                <img src="{% static 'images/output-onlinepngtools(4).png' %}" class="edit_icon">
+                            </div>
+                            <p class="description">{{recipe.description}} </p>
+                            <img src="{% static 'images/del.png' %}" alt="" class="delete_recipe">
+                        </div>
+                        <div class="display_recipe_image" style="background-image: url('{{ recipe.RecipeImage.url }}');"></div>
+                        <a href="" class="view_int"></a>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+        
+    {% endblock %}
+    
+</main>
+
+
+{% include 'shared/footer.html' %}
+
+<script src="{% static 'js/myrecipes.js' %}"></script>
